@@ -2,12 +2,10 @@
   "name": "hacker-views",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "1.0.10"
-  },
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
