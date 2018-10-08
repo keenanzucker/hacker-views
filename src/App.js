@@ -11,7 +11,8 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to Hacker Views</h1>
         </header>
-        <NewsList />        
+        <NewsList />    
+        <footer>Built by Keenan using React, the News API, and love!</footer>    
       </div>
     );
   }

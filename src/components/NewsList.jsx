@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import NewsTile from './NewsTile';
 
 class NewsList extends Component {
 
@@ -12,7 +13,45 @@ class NewsList extends Component {
     };
   }
 
+  // The default state is sorting by 'hot' or the default Hacker News stories
   componentDidMount() {
+    this.getHot();
+  }
+
+  getNewest = () => {
+    this.setState({isLoading: true});
+
+    fetch('https://api.hnpwa.com/v0/newest/1.json')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          news: data,
+          isLoading: false
+        })
+      })
+  }
+
+  getTop = () => {
+    this.setState({isLoading: true});
+
+    fetch('https://api.hnpwa.com/v0/news/1.json')
+      .then(res => res.json())
+      .then(data => {
+
+        let sortedData = data.sort((a,b) => {
+          if (a.points > b.points) return -1;
+          if (a.points < b.points) return 1;
+          return 0;
+        });
+
+        this.setState({
+          news: sortedData,
+          isLoading: false
+        })
+      })
+  }
+
+  getHot = () => {
     this.setState({isLoading: true});
 
     fetch('https://api.hnpwa.com/v0/news/1.json')
@@ -31,18 +70,20 @@ class NewsList extends Component {
 
     return (
       <div>
-          {news.map(story => {
-            return (
-              <div className="news-story-container" key={story.id}>
-                  <h4><a target='_blank' href={story.url}>{story.title}</a></h4>
-                  <label>{story.domain}</label>
-                  <p>{story.points}</p>
-              </div>
-            );
-          })}
+        <button onClick={this.getNewest}>Newest</button>
+        <button onClick={this.getTop}>Top</button>
+        <button onClick={this.getHot}>Hot</button>
+        <div className="news-list-container">
+            {news.map(story => {
+              return (
+                <NewsTile key={story.id} story={story}/> 
+              );
+            })}
+        </div>
       </div>
     );
   }
 }
 
 export default NewsList;
+

@@ -17,10 +17,19 @@
   font-size: large;
 }
 
+.news-list-container {
+  background-color: white;
+  display: flex;
+  flex-flow: wrap;
+}
+
 .news-story-container {
+  background-color: white;
   text-align: left;
   font-size: 14px;
-  border: 1px lightblue solid;
-  padding: 5px;
+  border-radius: 5px;
+  padding: 15px;
   margin: 20px;
+  filter: drop-shadow(0 0 0.2rem indigo);
+  min-width: 200px;
 }
